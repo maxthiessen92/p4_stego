@@ -42,10 +42,10 @@ get_image.py functionality:
 
 magnify_lsbs.py functionality:
 
-- run python magnify_lsbs.py <image_source_addr>
+- to run: python magnify_lsbs.py <image_source_addr>
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 find_img.py functionality:
 
-- run python find_img.py <image_source_addr> <height> <width> <number of lsbs> <get red (1 or 0)> <get green (1 or 0)> <get blue (1 or 0)> <search orientation> <channel gathering order (rgb, bgr, etc.)>
+- to run: python find_img.py <image_source_addr> <height> <width> <number of lsbs> <get red (1 or 0)> <get green (1 or 0)> <get blue (1 or 0)> <search orientation> <channel gathering order (rgb, bgr, etc.)>
