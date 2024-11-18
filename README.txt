@@ -11,7 +11,7 @@ find_img.py -> produces an hidden image from parameters.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 get_text.py functionality:
 
-to use check_header function:
+to use get_header function:
 
 python get_text.py -check_header <image_source_addr> <suspected_header_start_bit(0, 16, 32, etc.)> <suspected_header_end_bit depth(number of lsbs extracted)> <number of lsbs> <get from red channel (1 is yes, 0 is no)> <get from green channel (1 is yes, 0 is no)> <get from blue channel (1 is yes, 0 is no)> <orientation (lrtb, tblr, btlr, etc)>
 
