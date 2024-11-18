@@ -79,7 +79,7 @@ if __name__ == "__main__":
                     if blue:
                         bits+=(bin((img[r,c,2] & lsbs))[2:].zfill(int(sys.argv[4])))
     bits = bits[64:]
-    print("Number of bits: ", len(bits))
+    print("Number of bits: ", len(bits)+64)
     image = np.zeros((int(sys.argv[2]), int(sys.argv[3]), 3), dtype=np.uint8)
     for r in range(int(sys.argv[2])):
         for c in range(int(sys.argv[3])):
