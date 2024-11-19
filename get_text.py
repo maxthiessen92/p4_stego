@@ -5,14 +5,14 @@ import sys
 
 #returns a number value that represents a hidden header
 #input the image source, the start bit, and the end bit of where you want to test the header location
-def get_header(image, header_start, header_end, depth, rd, gr, bl, orient):
+def get_header(image, header_start, header_end, depth, rd, gr, bl, orient, start_bit):
     # read in image
     img = imageio.imread(image)
     length = int(header_end)//int(depth)
     height, width, _ = img.shape
     print("Height:", height, "Width:", width)
     print("Max Characters:", height*width * (3*int(depth)) / 8)
-    lsbs = (1 << int(depth)) - 1
+    lsbs = ((1 << int(depth)) - 1) << (int(start_bit)-1)
     chars = []
     red = bool(int(rd))
     green = bool(int(gr))
@@ -25,97 +25,97 @@ def get_header(image, header_start, header_end, depth, rd, gr, bl, orient):
             for c in range(width):
                 if len(chars) < length:  
                     if red:
-                        chars.append(bin((img[r,c,0] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,0] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if green:
-                        chars.append(bin((img[r,c,1] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,1] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if blue:
-                        chars.append(bin((img[r,c,2] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,2] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
     elif orientation == "rltb":
         for r in range(height):
             for c in range(width-1, -1, -1):
-                  if len(chars) < length:
+                  if len(chars) < length:  
                     if red:
-                        chars.append(bin((img[r,c,0] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,0] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if green:
-                        chars.append(bin((img[r,c,1] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,1] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if blue:
-                        chars.append(bin((img[r,c,2] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,2] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
     elif orientation == "tblr":
         for c in range(height):
             for r in range(width):
-                  if len(chars) < length:
+                  if len(chars) < length:  
                     if red:
-                        chars.append(bin((img[r,c,0] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,0] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if green:
-                        chars.append(bin((img[r,c,1] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,1] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if blue:
-                        chars.append(bin((img[r,c,2] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,2] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
     elif orientation == "btlr":
         for c in range(height):
             for r in range(width -1, -1, -1):
-                  if len(chars) < length:
+                  if len(chars) < length:  
                     if red:
-                        chars.append(bin((img[r,c,0] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,0] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if green:
-                        chars.append(bin((img[r,c,1] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,1] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if blue:
-                        chars.append(bin((img[r,c,2] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,2] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
     elif orientation == "lrbt":
         for r in range(height-1, -1, -1):
             for c in range(width):
-                 if len(chars) < length:
+                 if len(chars) < length:  
                     if red:
-                        chars.append(bin((img[r,c,0] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,0] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if green:
-                        chars.append(bin((img[r,c,1] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,1] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if blue:
-                        chars.append(bin((img[r,c,2] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,2] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
     elif orientation == "rlbt":
         for r in range(height-1, -1, -1):
             for c in range(width-1, -1, -1):
-                  if len(chars) < length:
+                  if len(chars) < length:  
                     if red:
-                        chars.append(bin((img[r,c,0] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,0] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if green:
-                        chars.append(bin((img[r,c,1] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,1] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
                         break
                     if blue:
-                        chars.append(bin((img[r,c,2] & lsbs))[2:].zfill(int(depth)))
+                        chars.append(bin(((img[r,c,2] & lsbs) >> (int(start_bit)-1)))[2:].zfill(int(depth)))
                     if len(chars) == length:
-                        break         
+                        break
     #set the header to a string from the inputed header_start to the end of the char array
     #print(chars)
     header = "".join(chars[int(header_start):])
