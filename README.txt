@@ -1,12 +1,13 @@
 Required Libraries: numpy, imageio, sys
-
+Required Python version: 3.10 or higher
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Two different files: 
+Five different files: 
 get_text.py -> Contains functions that help find hidden text messages
 get_image.py -> Contains functions that help find hidden images.
 magnify_lsbs.py -> produces an image of magnified lsbs
 find_img.py -> produces an hidden image from parameters.
+master_script.py -> helps automate the process of finding things with these tools
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 get_text.py functionality:
@@ -49,3 +50,15 @@ magnify_lsbs.py functionality:
 find_img.py functionality:
 
 - to run: python find_img.py <image_source_addr> <height> <width> <number of lsbs> <get red (1 or 0)> <get green (1 or 0)> <get blue (1 or 0)> <search orientation> <channel gathering order (rgb, bgr, etc.)>
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+master_script.py functionality:
+
+- to run: python master_script.py
+
+Tools:
+
+- check for headers in any possible orientation, saves console output as a text file
+- create images of any bit in the channels you want to magnify
+- generate hidden images through inputs
