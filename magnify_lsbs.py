@@ -1,8 +1,11 @@
 import numpy as np
 import imageio
 import sys
-def magnify(image, which_bit, folder):
-    img = imageio.imread(image)
+import os
+def magnify(image, which_bit, folder_from, folder_to):
+    if not os.path.exists(os.path.abspath(os.getcwd())+"/"+folder_to):
+        os.makedirs(os.path.abspath(os.getcwd())+"/"+folder_to)
+    img = imageio.imread(f"{folder_from}/{image}")
     height, width, channels = img.shape
     print("Height:", height, "Width:", width, "Number of Channels:", channels)
     mask = 1 << (int(which_bit)-1)
@@ -21,8 +24,8 @@ def magnify(image, which_bit, folder):
             else:
                 img[r, c][2] = 0
                 
-
-    imageio.imwrite(folder+"/"+image[7:], img)
+    print(f"{folder_to}/{image.partition("/")[0].partition(".")[0]}")
+    imageio.imwrite(f"{folder_to}/{image.partition("/")[0].partition(".")[0]}.png", img)
 
 if __name__ == "__main__":
-    magnify(sys.argv[1], sys.argv[2], sys.argv[3])
+    magnify(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
