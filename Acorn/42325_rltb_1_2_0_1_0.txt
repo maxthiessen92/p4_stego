@@ -1,0 +1,6 @@
+header length: 0
+header value: 42357
+Height: 1024 Width: 1024
+Max Characters: 786432.0
+3
+
